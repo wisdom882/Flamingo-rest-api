@@ -43,7 +43,7 @@ const LogInUser = asyncHandler(async(res,req) => {
 
     const{email, password} = req.body
 
-    const user = await User.findOne({email: eamil})
+    const user = await User.findOne({email: email})
 
     if(user && (await user.matchPassword(password))){
 
@@ -59,3 +59,50 @@ const LogInUser = asyncHandler(async(res,req) => {
         throw new Error ("email or password do not match")
     }
 })
+
+//Get list of all users
+//ROUTE GET /api/users
+
+const getUsers = asyncHandler(async (req, res) => {
+    const users = await User.find({}); //No need for parameter
+    res.json(users);
+  });
+  
+  //Get user by id
+  //ROUTE GET /api/users/:id
+  
+  const getUserById = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id).select("-password");
+  
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404);
+      throw new Error("User not found");
+    }
+  });
+  
+  //Update a user
+  //ROUTE PUT /api/users/:id
+  
+  const updateUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+  
+    if (user) {
+      user.firstName = req.body.firstName || user.firstName;
+      user.lastName = req.body.lastName || user.lastName;
+      user.email = req.body.email || user.email;
+  
+      const updatedUser = await user.save();
+  
+      res.json({
+        _id: updatedUser._id,
+        firstName: updatedUser.firstName,
+        lastName: updatedUser.lastName,
+        email: updatedUser.email,
+      });
+    } else {
+      res.status(404);
+      throw new Error("User not found");
+    }
+  });
