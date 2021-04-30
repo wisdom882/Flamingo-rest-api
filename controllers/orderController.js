@@ -49,7 +49,7 @@ const deleteOrder = asyncHandler((res, req) => {
       order.delete();
     } else {
       res.status(404);
-      throw new Error("User not found");
+      throw new Error("order not found");
     }
 })
 
@@ -66,6 +66,6 @@ const getOrderById = asyncHandler((res,req) => {
       res.json(order);
     } else {
       res.status(404);
-      throw new Error("User not found");
+      throw new Error("order not found");
     }
 })
