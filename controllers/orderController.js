@@ -36,13 +36,6 @@ const deleteOrder = asyncHandler((res, req) => {
   
     console.log(req.body)
 
-    //check if cart is empty or invalid
-    if(items && items.length === 0)
-    {
-        res.status(400)
-        throw new Error('no items in order')   
-    }
-
     const order = await Order.findById(req.params.id);
   
     if (order) {
