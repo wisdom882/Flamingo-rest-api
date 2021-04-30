@@ -43,19 +43,29 @@ const deleteOrder = asyncHandler((res, req) => {
         throw new Error('no items in order')   
     }
 
-    const order = new Order({
-
-        items : items
-        
-    })
-
-    const deletedOrder = await order.delete()
-
-    res.status(201).json(deletedOrder)
+    const order = await Order.findById(req.params.id);
+  
+    if (order) {
+      order.delete();
+    } else {
+      res.status(404);
+      throw new Error("User not found");
+    }
 })
 
 const getOrders = asyncHandler((req,res) => {
 
-    // Can you give me a hint on how this function works?
-    //like what does it return?s
+    const orders = await Order.find({}); //No need for parameter
+    res.json(orders);
+})
+
+const getOrderById = asyncHandler((res,req) => {
+    const order = await Order.findById(req.params.id);
+  
+    if (order) {
+      res.json(order);
+    } else {
+      res.status(404);
+      throw new Error("User not found");
+    }
 })
