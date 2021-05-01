@@ -5,8 +5,11 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server",
+    "start": "node server.js",
     "watch": "nodemon server"
+  },
+  "engines": {
+    "node":"15.8.0"
   },
   "repository": {
     "type": "git",
