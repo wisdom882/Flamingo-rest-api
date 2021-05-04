@@ -55,7 +55,7 @@ const getOrderById = asyncHandler(async(res,req) => {
   }
   else{
     res.status(404)
-    throw new Error("Could not find order")
+    throw new Error("Could not find")
   }
 })
 export { addOrders, deleteOrder, getOrders, getOrderById };
