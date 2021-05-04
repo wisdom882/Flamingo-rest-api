@@ -29,7 +29,7 @@ const deleteOrder = asyncHandler(async(req,res) => {
     if(orderToDelete)
     {
       orderToDelete.delete()
-      res.status({message:"order successfully deleted"})
+      res.json({message:"order successfully deleted"})
     }
     else{
       res.status(404)
