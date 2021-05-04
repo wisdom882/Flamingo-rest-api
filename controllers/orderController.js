@@ -38,14 +38,14 @@ const deleteOrder = asyncHandler(async(req,res) => {
 
 })
 
-const getOrders = asyncHandler(async(res,req) => {
+const getOrders = asyncHandler(async(req,res) => {
   console.log(req.body)
   const orders = await Order.find({}) 
   res.json(orders)
 
 })
 
-const getOrderById = asyncHandler(async(res,req) => {
+const getOrderById = asyncHandler(async(req,res) => {
   console.log(req.body)
   const orderById = await Order.findById(req.params.id)
 
