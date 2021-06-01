@@ -6,4 +6,5 @@ const generationToken = (id) => {
     })
 }
 
+
 export default generationToken

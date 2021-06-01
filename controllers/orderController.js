@@ -40,6 +40,7 @@ const deleteOrder = asyncHandler((res, req) => {
   
     if (order) {
       order.delete();
+      res.json({message:"order successfully deleted"})
     } else {
       res.status(404);
       throw new Error("order not found");

@@ -5,8 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start":"node server",
-    "watch":"nodemon server"
+    "start": "node server",
+    "watch": "nodemon server"
   },
   "repository": {
     "type": "git",
