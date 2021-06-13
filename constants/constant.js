@@ -1,0 +1,1 @@
+export const itemsType =['formation', 'position', 'tactics']

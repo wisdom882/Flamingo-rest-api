@@ -9,6 +9,15 @@
 import asyncHandler from 'express-async-handler'
 import Order from '../models/orderModel'
 
+const createOrder = async (items) =>{
+  const order = new Order({
+
+    items : items,
+    user: req.user_id
+  })
+  const newOrder = await order.save()
+  return newOrder
+}
 const addOrder = asyncHandler(async(req, res) => {
 
     console.log(req.body)
@@ -19,15 +28,7 @@ const addOrder = asyncHandler(async(req, res) => {
         res.status(400)
         throw new Error('no items in order')   
     }
-
-    const order = new Order({
-
-        items : items,
-        user: req.user_id
-    })
-
-    const newOrder = await order.save()
-
+    createOrder(items)
     res.status(201).json(newOrder)
 
 })
