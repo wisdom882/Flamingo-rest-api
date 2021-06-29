@@ -1,9 +1,9 @@
 import asyncHandler from "express-async-handler"
-import User from '../models/userModel'
-import generateToken from "../utils/generateToken"
+import User from '../models/userModel.js'
+import generateToken from "../utils/generateToken.js"
 
 //Signup user
-const signUpUser = asynchandler(async (req, res) => {
+const signUpUser = asyncHandler(async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
 
     //check if user exist ( yes -/no we create)
@@ -39,7 +39,7 @@ const signUpUser = asynchandler(async (req, res) => {
 //signIn
 //route Post/api/users/login
 
-const LogInUser = asyncHandler(async(res,req) => {
+const loginUser = asyncHandler(async(res,req) => {
 
     const{email, password} = req.body
 
@@ -106,3 +106,18 @@ const getUsers = asyncHandler(async (req, res) => {
       throw new Error("User not found");
     }
   });
+
+  const deleteUser = asyncHandler(async (req, res) => {
+    const user = User.findById(req.params.id);
+  
+    if (user) {
+      await User.remove();
+      res.json({ message: "User deleted" });
+    } else {
+      res.status(404);
+      throw new Error("User not deleted");
+    }
+  });
+
+  //Export all functions
+export { signUpUser, loginUser, getUsers, getUserById, updateUser, deleteUser };
