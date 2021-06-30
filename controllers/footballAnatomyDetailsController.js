@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler'
-import footballAnatomyDetails from '../models/footballAnatomyDetailsModel'
-import {itemsType} from '../constants/constant'
+import footballAnatomyDetails from '../models/footballAnatomyDetailsModel.js'
+import {itemsType} from '../constants/constant.js'
 
 //add
 //delete
@@ -29,7 +29,7 @@ const createFootballItem = async (footballItems) => {
 }
 
 const addFootballItem = asyncHandler(async(req,res) =>{
-    const { title,description,imageUrl } = req.body
+    const { title,description,imageUrl,itemType } = req.body
     const footballItemExists = await footballAnatomyDetails.findOne({title: title})
 
     if (footballItemExists) {
@@ -41,6 +41,9 @@ const addFootballItem = asyncHandler(async(req,res) =>{
         title: title,
         description: description,
         imageUrl: imageUrl,
+        itemType: itemType,
+        status: true,
+        dateCreated: Date.now()
     })
 
     if(footballItem) {
@@ -48,8 +51,7 @@ const addFootballItem = asyncHandler(async(req,res) =>{
             _id: footballItem.id,
             title: footballItem.title,
             description:footballItem.description,
-            imageUrl: footballItem.imageUrl,
-            token: generateToken(footballItem.id)
+            imageUrl: footballItem.imageUrl
         })
 
     } else{
@@ -58,7 +60,7 @@ const addFootballItem = asyncHandler(async(req,res) =>{
     }
 })
 
-const deleteFootballItems = asyncHandler((res, req) => {
+const deleteFootballItems = asyncHandler(async(res, req) => {
   
     console.log(req.body)
 
@@ -72,12 +74,12 @@ const deleteFootballItems = asyncHandler((res, req) => {
     }
 })
 
-const getAllFootball = asyncHandler((req,res) =>{
+const getAllFootball = asyncHandler(async(req,res) =>{
     const footballitems = await footballAnatomyDetails.find({}); //No need for parameter
     res.json(footballitems);
 })
 
-const getFootballByID = asyncHandler((res,req) => {
+const getFootballByID = asyncHandler(async(res,req) => {
     const footballitem = await footballAnatomyDetails.findById(req.params.id);
   
     if (footballitem) {
@@ -87,3 +89,5 @@ const getFootballByID = asyncHandler((res,req) => {
       throw new Error("item not found");
     }
 })
+
+export {createFootballItem , addFootballItem, deleteFootballItems, getAllFootball, getFootballByID, getItemsType}

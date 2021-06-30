@@ -12,7 +12,7 @@ import {
 const router = express.Router();
 
 
-router.route("/createFootballItem").post(createFootballItem);
+
 router.route("/addFootballItem").post(addFootballItem);
 router
     .route("/:id")

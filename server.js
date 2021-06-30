@@ -6,6 +6,7 @@ import connectDB from './config/db.js'
 
 //Route Imports
 import userRoutes from "./routes/userRoutes.js";
+import footballRoutes from "./routes/footballRoutes.js"
 
 
 dotenv.config()
@@ -19,6 +20,7 @@ app.use(express.json());
 
 //Routes
 app.use("/api/users", userRoutes);
+app.use("/api/footballanatomy", footballRoutes)
 //app.use("/api/orders", orderRoutes);
 
 app.listen(PORT, () => console.log(`server started on PORT  ${PORT}`))

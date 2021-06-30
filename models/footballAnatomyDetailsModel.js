@@ -16,7 +16,7 @@ const footballAnatomyDetailsSchema = mongoose.Schema({
             required: true,
         },
 
-        ItemType:{
+        itemType:{
             type: String,
             required: true,
         },
