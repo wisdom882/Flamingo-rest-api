@@ -22,6 +22,7 @@ const signUpUser = asyncHandler(async (req, res) => {
     })
 
     if(user) {
+      console.log("User successfully created")
         res.status(201).json({
             _id: user.id,
             firstName: user.firstName,
