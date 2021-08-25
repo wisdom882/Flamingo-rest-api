@@ -4,6 +4,7 @@ const footballAnatomyDetailsSchema = mongoose.Schema({
         title:{
             type: String,
             required: true,
+            unique: true,
         },
     
         description:{
@@ -27,9 +28,7 @@ const footballAnatomyDetailsSchema = mongoose.Schema({
         },
     
         dateDeleted:{
-            type:{
-                type: Date,
-            }
+           type: Date,
         },
 
         status:{
@@ -45,5 +44,5 @@ const footballAnatomyDetailsSchema = mongoose.Schema({
     //deleteStatus 0 to 1
 })
 
-const footballAnatomyDetails = mongoose.model('footballAnatomyDetails', footballAnatomyDetailsSchema)
-export default footballAnatomyDetails;
+const FootballAnatomyDetails = mongoose.model('footballAnatomyDetails', footballAnatomyDetailsSchema)
+export default FootballAnatomyDetails;
