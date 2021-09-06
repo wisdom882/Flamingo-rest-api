@@ -45,7 +45,7 @@ const addFootballItem = asyncHandler(async (req, res) => {
     dateCreated: Date.now(),
     dateDeleted: null,
   });
-
+  
   if (footballItem) {
     res.status(201).json({
       _id: footballItem.id,
