@@ -124,5 +124,17 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 });
 
+const signOutUser = asyncHandler(async(req,res) => {
+  const user = User.findById(req.params.id)
+  if (user) {
+    user = null;
+    res.json({message: "Successfully logged out"})
+  }
+  else{
+    //still invalidate token
+    res.json({message: "user not logged in yet"})
+  }
+})
+
 //Export all functions
-export { signUpUser, loginUser, getUsers, getUserById, updateUser, deleteUser };
+export { signUpUser, loginUser, getUsers, getUserById, updateUser, deleteUser, signOutUser };

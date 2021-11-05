@@ -6,4 +6,6 @@ const generateToken = (id) => {
   });
 };
 
+//write invalidate token function
+
 export default generateToken;
